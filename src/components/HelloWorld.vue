@@ -68,7 +68,7 @@
               </form>
       </div>
 <div class="cards">
-      <div class="card" v-for="card, i in cards" :key="i">
+      <div class="card" v-for="card, i in filteredCards" :key="i">
         <div style="display: flex; justify-content: space-between; align-items: center">
             <img src="KC.png" alt=""><h2>{{card.company}}</h2>
            <p>Нет багажа</p>
@@ -147,7 +147,13 @@ export default {
   },
    computed: {
    filteredCards: function () {
-     return this.cards.filter( card => card.category.match(this.search))
+     return this.cards.filter( card => card.category.includes(this.search))
+   },
+    methods: {
+     filterList(event) {
+       console.log(event.targer.textContent)
+       return this.cards.filter(card => card.name === event.target.textContent)
+     }
    }
    }
 }
